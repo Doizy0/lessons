@@ -6,28 +6,31 @@
 
 n, m, p = map(int, input().split())
 
-
 a = []
 for i in range(n):
-    row1 = list(map(int, input().split()))
-    for j in range(m):
-        a[i][j] = row1[j]
+    a.append(list(map(int, input().split())))
 
+input()
 
 b = []
 for i in range(m):
-    row2 = list(map(int, input().split()))
-    for j in range(p):
-        b[i][j] =row2[j]
+    b.append(list(map(int, input().split())))
+
+#  2  3    2 -3  4
+# -1  4    3  1  0    13 -3 8
+
 
 c = []
 for i in range(n):
     row3 = []
     for j in range(p):
-
-        sum = 0
+        summ = 0
         for k in range(m):
-            sum += a[i][k] * b[k][j]
-        row3.append(sum)
+            summ += a[i][k] * b[k][j]
+        row3.append(summ)
     c.append(row3)
 
+for i in range(n):
+    for j in range(p):
+        print(c[i][j], end=' ')
+    print()
