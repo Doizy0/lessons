@@ -14,6 +14,6 @@ for i in range(n):
         j -= 1
     times[j + 1] = key
 
-print(*times, end=' ')
-print()
+for time in times:
+    print(times)
 
