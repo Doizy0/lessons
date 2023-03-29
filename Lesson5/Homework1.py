@@ -1,4 +1,4 @@
-#Требуется выполнить сортировку временных моментов, заданных в часах, минутах и секундах.
+
 #https://acmp.ru/asp/do/index.asp?main=task&id_course=1&id_section=7&id_topic=118&id_problem=728
 n = int(input())
 times = []
