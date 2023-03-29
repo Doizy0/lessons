@@ -1,24 +1,22 @@
-def can_pass_decision(num_supporters, group_sizes):
-    num_groups = len(group_sizes)
-    num_yes_votes = 0
-    for group_size in group_sizes:
-        num_yes_votes += min(num_supporters, (group_size + 1) // 2)
-        if num_yes_votes > num_supporters:
-            return False
-    return num_yes_votes > num_groups // 2
+def min_party_support(group_sizes):
 
+    n = len(group_sizes)
 
-num_groups = int(input())
-group_sizes = list(map(int, input().split()))
+    min_votes = (n // 2) + 1
+    max_votes = sum((g + 1) // 2 for g in group_sizes)
 
+    lo, hi = 0, max_votes
+    while lo < hi:
+        mid = (lo + hi) // 2
 
-lo, hi = 0, sum(group_sizes)
-while lo < hi:
-    mid = (lo + hi) // 2
-    if can_pass_decision(mid, group_sizes):
-        hi = mid
-    else:
-        lo = mid + 1
+        votes_for = 0
+        for g in group_sizes:
+            votes_for += (g // 2) + min(g % 2, max(0, mid - (g // 2)))
+        if votes_for >= min_votes:
+            hi = mid
+        else:
+            lo = mid + 1
+    return lo
 
-
-print(lo)
+n = int(input())
+group_sizes = list(map, input().split())

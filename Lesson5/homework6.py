@@ -13,7 +13,7 @@ def to_grams(weight):
     while i < len(weight) and weight[i].isdigit():
         i += 1
     number = float(weight[:i])
-    unit = weight[i:].strip()
+    unit = weight[i:].split()
     if unit == 'mg':
         grams = number * 0.001
     elif unit == 'g':
