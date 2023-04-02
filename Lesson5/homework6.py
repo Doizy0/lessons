@@ -1,46 +1,42 @@
-def sort(array, reverse=True):
-    for i in range(len(array) - 1):
-        for j in range(len(array) - 1 - i):
-            if array[j] > array[j + 1]:
-                array[j], array[j + 1] = array[j + 1], array[j]
-    return array
-
 
 
 def to_grams(weight):
-    grams = 0
-    i = 0
-    while i < len(weight) and weight[i].isdigit():
-        i += 1
-    number = float(weight[:i])
-    unit = weight[i:].split()
-    if unit == 'mg':
-        grams = number * 0.001
-    elif unit == 'g':
-        grams = number
-    elif unit == 'kg':
-        grams = number * 1000
-    elif unit == 't':
-        grams = number * 1000000
-    elif unit == 'mp':
-        grams = number * 16.38
-    elif unit == 'p':
-        grams = number * 16380
-    elif unit == 'M':
-        grams = number * 16380000
-    elif unit == 'G':
-        grams = number * 16380000000
-    return grams
+    ratio = {
+        'g': 1,
+        'p': 16380,
+        't': 10 ** 6
+
+    }
+    prefix = {
+        'm': 0.001,
+        'k': 10 ** 3,
+        'M': 10 ** 6,
+        'G': 10 ** 9
+    }
+    num, unit = weight.split()
+    total_unit = ' '.join(unit).split()
+    sub_unit = None
+    if len(total_unit) == 1:
+        main_unit = total_unit[0]
+    else:
+        sub_unit, main_unit = total_unit
+
+    return int(num) * ratio[main_unit] * (prefix[sub_unit] if sub_unit else 1)
 
 
 n = int(input())
 weights = []
 for i in range(n):
-    weight = input().strip()
-    grams = to_grams(weight)
-    weights.append((grams, weight))
+    weight = input()
+    weights.append(weight)
 
-sort(weights)
+sorted_weights = sorted(weights, key=to_grams)
 
-for weight_tuple in weights:
-    print(weight_tuple[1])
+print(*sorted_weights, sep='\n')
+
+#
+# 32 mg
+# 234 g
+# 4576 mp
+# 2 t
+# 2 Mg
