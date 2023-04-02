@@ -41,3 +41,4 @@ for day, month, hour, minute, leaflet_type in leaflets:
 
 hours = int(total_work_time * 24)
 minutes = int((total_work_time * 24 * 60) % 60)
+print(hours+':'+minutes)
